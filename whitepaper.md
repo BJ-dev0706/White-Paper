@@ -105,62 +105,64 @@ Mathematical equivalence (Section 5.2) preserves validator workload while sharpl
 **Epoch Model.**
 The probability that validator $v_i$ is selected for *at least one* of the $kM$ slots in an epoch:
 
-\begin{align}
-P_i^{\textrm{epoch}} &= 1 - (1 - p_i)^{kM} \tag{1} \\[1em]
-\mathbb{E}\left[X_i^{\textrm{epoch}}\right] &= kM p_i \tag{2}
-\end{align}
+$$
+\begin{align*}
+P_i^{\mathrm{epoch}} &= 1 - (1 - p_i)^{kM} \tag{1} \\[1em]
+\mathbb{E}[X_i^{\mathrm{epoch}}] &= kM p_i \tag{2}
+\end{align*}
+$$
 
 **Global (VRF) Model.**
-With $\frac{86{,}400}{\lambda} = 1{,}440$ rounds per day and $k' = 11$, the per-round selection probability under simple random sampling without replacement ($k' \ll N$):
+With $\frac{86{,}400}{\lambda} = 1{,}440$ rounds per day and $k' = 11$, the per-round selection probability under simple random sampling without replacement ($k' \ll N$) is:
 
-\begin{equation}
-P_i^{\textrm{round}} = k' p_i \tag{3}
-\end{equation}
+$$
+P_i^{\mathrm{round}} = k' p_i \tag{3}
+$$
 
 Thus, the expected daily assignments:
 
-\begin{equation}
-\mathbb{E}\left[X_i^{\textrm{day}}\right] = 1{,}440\, k' p_i \tag{4}
-\end{equation}
+$$
+\mathbb{E}[X_i^{\mathrm{day}}] = 1{,}440\, k' p_i \tag{4}
+$$
 
 ### 5.3 Reward Expectation, Variance & Gini
 
 **Expectation:**
 Daily reward for validator $v_i$:
 
-\begin{equation}
-\mathbb{E}\left[R_i^{\textrm{day}}\right] = R_b\, \mathbb{E}\left[X_i^{\textrm{day}}\right]\, f_i \tag{5}
-\end{equation}
+$$
+\mathbb{E}[R_i^{\mathrm{day}}] = R_b\, \mathbb{E}[X_i^{\mathrm{day}}]\, f_i \tag{5}
+$$
 
 **Variance:**
 Approximating the Bernoulli assignment process by a Poisson random variable with rate $\lambda_i = 1{,}440\, k' p_i$:
 
-\begin{equation}
-\operatorname{Var}\left[X_i^{\textrm{day}}\right] = \lambda_i \tag{6}
-\end{equation}
+$$
+\mathrm{Var}[X_i^{\mathrm{day}}] = \lambda_i \tag{6}
+$$
 
-Coefficient of variation: $\operatorname{CV}_i = \frac{1}{\sqrt{\lambda_i}}$, decreasing as $p_i^{-1/2}$.
+Coefficient of variation: $\mathrm{CV}_i = \frac{1}{\sqrt{\lambda_i}}$, decreasing as $p_i^{-1/2}$.
 
 **Gini Coefficient:**
 For a Zipf stake distribution with exponent $\alpha = 1.1$, the Lorenz curve is $L(u) = u^{1 - 1/\alpha}$. The Gini index:
 
-\begin{equation}
+$$
 G = 1 - \frac{2}{2 - 1/\alpha} = 0.38 \tag{7}
-\end{equation}
+$$
 
 ### 5.4 Security Bounds for Adversarial Stake
 
 Let the adversary control a stake fraction $q \in [0,1]$. For committee size $k' = 11$, the probability that **at least** $f+1 = 4$ signers are malicious in a given round:
 
-\begin{equation}
-P_{\textrm{mal}}(q) = \sum_{j=4}^{11} \binom{11}{j} q^j (1-q)^{11-j} \tag{8}
-\end{equation}
+$$
+P_{\mathrm{mal}}(q) = \sum_{j=4}^{11} \binom{11}{j} q^j (1-q)^{11-j} \tag{8}
+$$
 
 Applying the Chernoff bound:
 
-\begin{equation}
-P_{\textrm{mal}}(q) \leq \exp\left[-D\left(\frac{4}{11}\,\Big\|\,q\right) \cdot 11\right] \tag{9}
-\end{equation}
+$$
+P_{\mathrm{mal}}(q) \leq \exp\left(-D\left(\frac{4}{11}\,\Big\|\,q\right) \cdot 11\right) \tag{9}
+$$
 
 where $D(a\,\|\,b)$ is the Kullback–Leibler divergence. For $q=0.25$ this upper-bounds to $9.3 \times 10^{-7}$.
 
@@ -168,32 +170,34 @@ where $D(a\,\|\,b)$ is the Kullback–Leibler divergence. For $q=0.25$ this uppe
 
 Validator performance evolves as a two-state Markov chain $\{A, B\}$ with transition probabilities:
 
-\begin{align}
+$$
+\begin{align*}
 P(A \rightarrow B) &= \alpha \tag{10a} \\[0.5em]
 P(B \rightarrow A) &= \beta \tag{10b}
-\end{align}
+\end{align*}
+$$
 
 The stationary penalty probability:
 
-\begin{equation}
+$$
 \pi_B = \frac{\alpha}{\alpha + \beta} \tag{11}
-\end{equation}
+$$
 
 With empirical $\alpha = 0.02,\, \beta = 0.5$, we obtain $\pi_B \approx 0.038$. Eigen-decomposition and mixing time bound $\tau_\varepsilon \leq \frac{\ln(1/\varepsilon)}{\alpha + \beta}$.
 
 ### 5.6 Cryptographic Randomness & Min-Entropy Proof
 
-Chainlink VRF outputs $\phi_t \in \{0,1\}^{256}$ with min-entropy $H_\infty(\phi_t) = 256$. Given the VRF security reduction to the Decisional Diffie–Hellman (DDH) assumption, any adversary with polynomial resources has advantage $< 2^{-128}$.
+Chainlink VRF outputs $\phi_t \in \{0,1\}^{256}$ with min-entropy $H_{\infty}(\phi_t) = 256$. Given the VRF security reduction to the Decisional Diffie–Hellman (DDH) assumption, any adversary with polynomial resources has advantage $< 2^{-128}$.
 
 ### 5.7 Latency & Throughput Queuing Model
 
-Block propagation is modeled as an $\mathrm{M}/\mathrm{M}/1$ queue with arrival rate $\lambda_b$ and service rate $\mu = 1/\Delta$ ($\Delta = 1\,\textrm{s}$ target). Average waiting time:
+Block propagation is modeled as an $\mathrm{M}/\mathrm{M}/1$ queue with arrival rate $\lambda_b$ and service rate $\mu = 1/\Delta$ ($\Delta = 1\,\mathrm{s}$ target). Average waiting time:
 
-\begin{equation}
-W = \frac{1}{\mu - \lambda_b} + d_{\textrm{net}} \tag{12}
-\end{equation}
+$$
+W = \frac{1}{\mu - \lambda_b} + d_{\mathrm{net}} \tag{12}
+$$
 
-where $d_{\textrm{net}} \approx 150\,\textrm{ms}$. Committee signature overhead contributes $L_c = (k'-1)d_{\textrm{net}} \approx 1.5\,\textrm{s}$.
+where $d_{\mathrm{net}} \approx 150\,\mathrm{ms}$. Committee signature overhead contributes $L_c = (k'-1)d_{\mathrm{net}} \approx 1.5\,\mathrm{s}$.
 
 ---
 
