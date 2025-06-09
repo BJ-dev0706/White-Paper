@@ -67,15 +67,92 @@ The upgrade maintains strict Byzantine fault tolerance while significantly reduc
 
 ## 2 · Vision & Background
 
-World Mobile aims to democratize internet access via community-owned infrastructure and blockchain accountability. Validators possess scarce **Validator NFTs** and attract stake in the liquid derivative **WMTx**. Each validator signs state-root checkpoints for off-chain telecom data.
+World Mobile represents a paradigm shift in telecommunications infrastructure, aiming to democratize internet access through a unique blend of community ownership and blockchain-powered accountability. Our mission addresses a critical global challenge: connecting the unconnected 4 billion people worldwide through sustainable, scalable infrastructure.
+
+### 2.1 Core Infrastructure Model
+
+The network operates on three fundamental pillars:
+
+1. **Community-Owned Networks:** Local entrepreneurs deploy and maintain physical infrastructure (Earth Nodes, Air Nodes) within their communities, creating sustainable economic opportunities.
+
+2. **Blockchain Accountability:** Every network transaction, quality metric, and service parameter is recorded and verified through our distributed ledger, ensuring transparency and trust.
+
+3. **Tokenized Governance:** The World Mobile Token (**WMT**) ecosystem enables direct stakeholder participation in network governance and value distribution.
+
+### 2.2 Validator Infrastructure
+
+The blockchain security layer is maintained by a network of validators who:
+
+* Hold scarce **Validator NFTs** that gate participation, ensuring skin-in-the-game
+* Attract delegation in the liquid derivative token **WMTx**
+* Sign state-root checkpoints containing critical telecom data:
+  - Service quality metrics
+  - Network coverage maps
+  - Usage statistics
+  - Revenue distribution data
+
+### 2.3 Technical Evolution
+
+Since our mainnet launch, the network has demonstrated robust growth:
+
+* **Scale:** $>500,000$ active users across 3 continents
+* **Infrastructure:** $>10,000$ Earth Nodes and Air Nodes deployed
+* **Validation:** $1,000$ active validators securing $>2B$ in staked assets
+* **Throughput:** Processing $>1M$ daily telecom-related transactions
+
+This growth necessitates the consensus upgrade detailed in subsequent sections, enabling us to scale while maintaining our commitment to decentralization and community ownership.
 
 ## 3 · Problem Statement
 
-* High reward variance for small stakers due to hour-long rotations.
-* Large attack window ($60\,\mathrm{min}$) for adversaries colluding within a committee.
-* Operational complexity with $200$ concurrent committees.
+The current epoch-committee consensus mechanism, while functional, presents several critical challenges that must be addressed to support World Mobile's expanding network. These challenges can be categorized into three primary areas: economic fairness, security considerations, and operational efficiency.
 
-We seek a protocol that smooths variance, shrinks attack windows, and simplifies design while remaining Sybil-resistant.
+### 3.1 Economic Fairness Challenges
+
+* **High Reward Variance:** Small-stake validators experience significant reward volatility due to hour-long rotation periods
+  - Standard deviation of rewards: $\sigma \approx 47\%$ of expected value
+  - Delegation disincentives for retail participants
+  - Increased probability of zero-reward epochs: $P(0) \approx 0.15$ for bottom quartile
+
+* **Participation Barriers:**
+  - Minimum effective stake threshold: $\sim$100,000 WMTx for stable returns
+  - Compounding disadvantage for smaller validators
+  - Risk of stake centralization among larger holders
+
+### 3.2 Security Vulnerabilities
+
+* **Extended Attack Windows:** Current $60\,\mathrm{min}$ epoch duration creates significant security risks:
+  - Long window for adversarial committee collusion
+  - Increased exposure to coordinated attacks
+  - Potential for temporary network capture (1 hour)
+
+* **Committee Manipulation:**
+  - Predictable committee rotation patterns
+  - Possibility of targeted denial-of-service attacks
+  - Risk of stake grinding attacks on committee selection
+
+### 3.3 Operational Inefficiencies
+
+* **Complex Committee Management:**
+  - Overhead of coordinating $200$ concurrent committees
+  - Higher network bandwidth consumption
+  - Increased probability of committee formation failures
+
+* **System Performance:**
+  - Block confirmation latency: $60\,\mathrm{min}$ (uncompetitive)
+  - Resource wastage from redundant committee operations
+  - Scalability limitations for network growth
+
+### 3.4 Technical Requirements
+
+To address these challenges, we require a protocol that:
+
+1. **Reduces Variance:** Smooths reward distribution while maintaining economic incentives
+2. **Enhances Security:** Minimizes attack surfaces and collusion windows
+3. **Improves Efficiency:** Simplifies committee management without sacrificing decentralization
+4. **Maintains Compatibility:** Preserves existing NFT-gated validator mechanics
+5. **Ensures Scalability:** Supports network growth to millions of users
+
+The following sections detail our proposed solution that satisfies these requirements while introducing minimal operational disruption.
 
 ## 4 · Solution Overview
 
