@@ -1,0 +1,22 @@
+---
+config:
+  theme: forest
+  look: neo
+  layout: elk
+---
+stateDiagram-v2
+    Active --> Backoff: Transition α = 0.02
+    Backoff --> Active: Transition β = 0.5
+    
+    Active: Performance > 95%
+    Active: High Throughput State
+    Backoff: Cooldown Period
+    Backoff: Reduced Load State
+    
+    note right of Active
+        Steady state π₁ = 0.962
+    end note
+    
+    note left of Backoff
+        Steady state π₂ = 0.038
+    end note 

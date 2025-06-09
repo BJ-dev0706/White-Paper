@@ -1,0 +1,23 @@
+---
+config:
+  theme: forest
+  look: neo
+  layout: elk
+---
+graph LR
+    A[Total WMT Supply] -->|Inflation Rate<br/>I₀e⁻ᵝᵗ| B[Circulating WMT]
+    B -->|Staking<br/>Mechanism| C[WMTx Staking Pool]
+    C -->|Validator<br/>Rewards| D[Reward Distribution]
+    D -->|Commission Rate| E[Validator Revenue Share]
+    D -->|Delegation Rewards| F[Delegator Revenue Share]
+    C -->|Token Burn<br/>Rate σ| G[Burn Mechanism]
+    G -->|Supply Reduction| A
+    
+    %% Enhanced styling
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style C fill:#bbf,stroke:#333,stroke-width:2px
+    style G fill:#fbb,stroke:#333,stroke-width:2px
+    style B fill:#fff,stroke:#333,stroke-width:2px
+    style D fill:#fff,stroke:#333,stroke-width:2px
+    style E fill:#efe,stroke:#333,stroke-width:2px
+    style F fill:#efe,stroke:#333,stroke-width:2px 

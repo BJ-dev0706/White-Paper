@@ -1,0 +1,21 @@
+---
+config:
+  theme: forest
+  look: neo
+  layout: elk
+---
+graph TD
+    A[Chainlink VRF Service] -->|Generate Random Seed| B[Committee Selection Process]
+    B --> C[Stake-Weighted Random Sampling]
+    C --> D[Selected Global Committee<br/>k'=11 validators]
+    E[Active Validator Pool<br/>N=1000 nodes] -->|Stake Distribution<br/>& Eligibility| C
+    F[Block Producer Node] -->|Block Proposal| G[Committee Validation]
+    G -->|Threshold Signatures<br/>(2f+1 required)| H[Finalized Block]
+    
+    %% Styling for better visual hierarchy
+    style A fill:#f9f,stroke:#333,stroke-width:4px
+    style D fill:#bbf,stroke:#333,stroke-width:2px
+    style H fill:#bfb,stroke:#333,stroke-width:2px
+    style E fill:#fff,stroke:#333,stroke-width:2px
+    style F fill:#fff,stroke:#333,stroke-width:2px
+    style G fill:#fff,stroke:#333,stroke-width:2px 
