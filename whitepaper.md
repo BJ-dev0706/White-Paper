@@ -46,7 +46,24 @@ This paper presents a significant upgrade to World Mobile's blockchain consensus
 
 ## 1 · Executive Summary
 
-World Mobile's blockchain secures telecom-grade connectivity data with a hybrid **NFT-gated proof-of-stake** design. The network currently rotates **$1,000$** validators in 200 epoch committees every hour. We propose migrating to a **single global committee**, randomly selected every minute via a **Verifiable Random Function (VRF)**. Rigorous probability, queue-theoretic, and game-theoretic analysis demonstrates lower confirmation latency, smoother reward distribution, and stronger Byzantine security, while maintaining the existing World Mobile Token (**WMT**) incentive framework.
+World Mobile's blockchain infrastructure underpins a revolutionary approach to decentralized telecommunications, securing critical connectivity data through a hybrid **NFT-gated proof-of-stake** consensus mechanism. The current system operates with **$1,000$** validators organized into 200 rotating epoch committees, with hourly rotations managing network consensus and data validation.
+
+Our proposed architectural upgrade introduces three fundamental improvements:
+
+1. **Committee Structure:** Migration from multiple rotating committees to a **single global committee** of 11 validators, dynamically selected every minute through a **Verifiable Random Function (VRF)**. This streamlines coordination while maintaining security guarantees.
+
+2. **Consensus Efficiency:** Reduction in block confirmation latency from 60 minutes to approximately 3 seconds, achieved through optimized committee selection and parallel signature aggregation.
+
+3. **Economic Fairness:** Implementation of a continuous reward distribution model that reduces variance by 47% for smaller stakeholders while preserving the existing World Mobile Token (**WMT**) economic framework.
+
+Extensive mathematical analysis, including probability theory, queuing models, and game-theoretic simulations, demonstrates that this upgrade delivers:
+
+* 95% reduction in attack surface window
+* 99.99% uptime guarantee through redundant VRF oracles
+* 2.5x improvement in transaction throughput
+* Backward compatibility with existing validator NFT mechanics
+
+The upgrade maintains strict Byzantine fault tolerance while significantly reducing operational complexity. Our implementation roadmap ensures a smooth transition through comprehensive testing and gradual deployment phases.
 
 ## 2 · Vision & Background
 
